@@ -29,7 +29,8 @@ class Id_Account:
     # 创建DoParameterize参数化类实例对象
     do_log = HandleLog(config_path).get_logger()
     # 请求参数data
-    data = """{q: "${query}", "f": 0, "d": True, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19", "sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
+    data_request = """{"q": "${query}", "f": 0, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19",     "sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
+    # data = """{"q": "${query}", "f": 0, "d": True, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19", "sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
 
     # data = {"q": "中秋节", "f": 0, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,
     #         "sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4",
@@ -71,26 +72,29 @@ class Id_Account:
         :return:
         '''
         # 替换请求数据data中的查询关键字query
-        data_new = self.do_parameterize.query_parametric(data=self.data)
+        data_new = self.do_parameterize.query_parametric(data=self.data_request)
         # print(data_new)
         data_dict = eval(data_new)
         # 将请求字段中的sid重新赋值为当前时间戳long类型
         data_dict['sid'] = self.generate_timestamp_long()
         # print(type(data_dict), data_dict)
-        # print(self.create_timed_task())
         try:
             # 接口请求
             response = self.do_requests.handle_requests(url=self.url, method=self.method, data=data_dict)
             # 获取响应体dict类型
             response_dict = response.json()
-            print(response_dict)
+            # print(response_dict)
             if response_dict['message'] == 'success' and response_dict['status'] == 0:
                 id_list = []
                 # 循环追加到id_list列表中
                 for result in response_dict['result']:
                     for data in result['data']:
-                        id_list.append(data['type'])
-                        id_list.append(data['id'])
+                        # 先判断key 'type'在data中是否存在
+                        if 'type' in data:
+                            # 先判断key 'id'在data中是否存在,因为type=images是没有id的
+                            if 'id' in data:
+                                id_list.append(data['type'])
+                                id_list.append(data['id'])
                 # print(id_list)
 
                 # 获取相同type类型的数据的数量，data_type_dict示例：{'news': 3, 'video': 8, 'book': 1, 'weibo': 3, 'web': 3}
