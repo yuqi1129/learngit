@@ -3,8 +3,9 @@
 # datetime:2019/10/9 10:02
 
 import os
+# import sys
+# sys.path.append('/home/work/wenbin/qa-system-monitor/qa-system-monitor')
 from random import choice
-# from threading import Timer
 from scripts.handle_path_constants import QUERY_DATAS
 
 

@@ -2,6 +2,8 @@
 # author:wenbin
 # datetime:2019/10/10 14:20
 import datetime
+# import sys
+# sys.path.append('/home/work/wenbin/qa-system-monitor/qa-system-monitor')
 from scripts.handle_requests import DoRequests
 from scripts.handle_mysql import HandleMySQL
 
