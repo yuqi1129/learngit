@@ -63,7 +63,7 @@ class QueryInterface:
         # print(sql_list)
         # sql语句
         sql = "insert into dpqadb.metrics(app,metric,tag,`value`,`time`) " \
-              "values ('falcon', 'nginx', %s, %s, %s);"
+              "values ('falcon', 'dp.pt.xiaomi.com_200__status_code/counter=nginx,pdl=cloudteg', %s, %s, %s);"
         # "insert into dpqadb.query_data_metrics(endpoint,counter,`time`,`value`) values (%s, %s, %s, %s);"
         # 执行同时插入多条sql语句操作
         self.do_mysql.sql_insert_more_execute(sql=sql, args=sql_list)
