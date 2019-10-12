@@ -135,7 +135,6 @@ class Id_Account:
                     # print(data_sql_list2)
                     # 插入多条数据sql语句
                     sql = "insert into dpqadb.metrics(app,metric,`value`,`time`) values ('integrity', %s, %s, %s);"
-
                     # print(sql)
                     # print(response_dict)
                     # 执行一次性插入多条数据的sql语句
@@ -154,6 +153,7 @@ class Id_Account:
                     self.execute_requests()
         except Exception as err:
             self.do_log.error('程序执行时报错了,具体异常为:{}'.format(err))
+            print(err)
             # 关闭session
             self.do_requests.session_close()
             # 关闭mysql连接

@@ -2,3 +2,4 @@
 2019-10-11 18:06:22,602 —— 【INFO】—— 【msg】:本次请求Query:悍妻威武,Search_Result:3,Response_ID_Details(TYPE-ID):['web', '7427798805805182510', 'web', '1185310629307985437', 'web', '2359062777127330482'] —— 【models】:sug_run —— 【funcName】:execute_requests —— 【lineno】:146
 2019-10-11 18:06:44,530 —— 【INFO】—— 【msg】:本次请求Query:悍妻威武,Search_Result:3,Response_ID_Details(TYPE-ID):['web', '7427798805805182510', 'web', '1185310629307985437', 'web', '2359062777127330482'] —— 【models】:sug_run —— 【funcName】:execute_requests —— 【lineno】:146
 2019-10-11 18:08:12,146 —— 【INFO】—— 【msg】:本次请求Query:悍妻威武,Search_Result:3,Response_ID_Details(TYPE-ID):['web', '7427798805805182510', 'web', '1185310629307985437', 'web', '2359062777127330482'] —— 【models】:sug_run —— 【funcName】:execute_requests —— 【lineno】:146
+2019-10-12 16:06:02,515 —— 【ERROR】—— 【msg】:程序执行时报错了,具体异常为:name '架飞机卡萨' is not defined —— 【models】:sug_run —— 【funcName】:execute_requests —— 【lineno】:156
