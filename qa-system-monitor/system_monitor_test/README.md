@@ -1,2 +1,0 @@
-1、每天16:30更新搜索关键词query
-2、根据query获取响应体相同type类型的id数量存放到mysql的dpqadb.metrics表中
