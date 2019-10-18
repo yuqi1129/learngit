@@ -59,7 +59,7 @@ class QueryInterface:
                 'host=' + item['endpoint'], item['value']['value'],
                 datetime.datetime.fromtimestamp(item['value']['timestamp']))
             # sql_list用于存放多条sql数据
-            sql_list.append(sql)
+            # sql_list.append(sql)
         # print(sql_list)
         # sql语句
         sql = "insert into dpqadb.metrics(app,metric,tag,`value`,`time`) " \

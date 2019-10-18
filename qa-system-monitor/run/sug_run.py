@@ -17,7 +17,7 @@ from randomly_extract_query_keywords.randomly_extract_keywords import ExtractKey
 
 class Id_Account:
     '''
-    统计IDcount类
+    MIUI sug接口ID统计类
     '''
     # 创建封装requests请求类实例对象
     do_requests = DoRequests()
@@ -34,7 +34,8 @@ class Id_Account:
     # 创建ExtractKeywords类实例对象
     extract_keywords = ExtractKeywords()
     # 请求参数data
-    data_request = """{"q": "${query}", "f": 0, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19",     "sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
+    data_request = """{"q": "${query}", "f": 0, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19","sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
+    # data_request = """{"q": "${query}", "_sl": True}"""
     # data = """{"q": "${query}", "f": 0, "d": True, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,"sp": "china mobile", "imei": None, "dm": "MIX 2S", "di": None, "sv": "MIUI 10.3.5", "vr": "4.4.4","vs": "19", "sid": 5, "s": 1, "n": 50, "_sl": True, "addr": "北京市海淀区清河朱房路", "cv": 0, "cc": None, "ti": None,"from": None, "h_t": None, "cd": True}"""
 
     # data = {"q": "中秋节", "f": 0, "sd": "xhdpi", "hl": "zh_CN", "p": 0, "nt": "wifi", "lo": 21.8, "la": 51.8, "se": None,
@@ -89,7 +90,7 @@ class Id_Account:
             # 获取响应体dict类型
             response_dict = response.json()
             # 打印响应体数据
-            # print(response_dict)
+            print(response_dict)
             if response_dict['message'] == 'success' and response_dict['status'] == 0:
                 if response_dict['result']:
                     global id_list
@@ -97,6 +98,8 @@ class Id_Account:
                     # 循环追加到id_list列表中
                     # print('不为空')
                     for result in response_dict['result']:
+                        # 如果只传query的话，先key：data判断是否在result内才不会报错
+                        # if 'data' in result:
                         for data in result['data']:
                             # 先判断key 'type'在data中是否存在
                             if 'type' in data:
@@ -138,7 +141,7 @@ class Id_Account:
                     # print(sql)
                     # print(response_dict)
                     # 执行一次性插入多条数据的sql语句
-                    self.do_mysql.sql_insert_more_execute(sql=sql, args=var)
+                    # self.do_mysql.sql_insert_more_execute(sql=sql, args=var)
                     # 打印出本次请求的日志保存到sug_requests.log日志文件中
                     self.do_log.info(
                         '本次请求Query:{},Search_Result:{},Response_ID_Details(TYPE-ID):{}'.format(
