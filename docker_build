@@ -1,0 +1,4 @@
+$ cat docker_build
+#!/bin/bash
+ 
+mkdir -p release/
